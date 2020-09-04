@@ -32,7 +32,7 @@ public class Cajera {
     }
     
     public void esperarXsegundos(int obj) throws InterruptedException {
-        Thread.sleep(obj);
+        Thread.sleep(obj*1000);
     }
 
     
