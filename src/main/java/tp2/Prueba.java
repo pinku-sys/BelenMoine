@@ -18,7 +18,7 @@ public class Prueba {
         t1.start();
         t2.start();
         
-        for (int i = 1 ; i<100;i++) {
+        for (int i = 1 ; i<400;i++) {
             System.out.println("EN EL MAIN ITERO");
         }
         // Espera unos segundos
