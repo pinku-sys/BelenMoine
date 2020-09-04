@@ -14,12 +14,20 @@ public class Prueba {
     public static void main(String[] args) {
         PingPong t1 = new PingPong("PING", 33);
         PingPong t2 = new PingPong("PONG", 10);
+        PingPong t3 = new PingPong("PANG", 10);
+        PingPong t4 = new PingPong("PUNG", 10);
         // Activación
         t1.start();
         t2.start();
         
         for (int i = 1 ; i<400;i++) {
             System.out.println("EN EL MAIN ITERO");
+            try {
+            System.out.println("duerme");
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+            
         }
         // Espera unos segundos
       /**  try {
