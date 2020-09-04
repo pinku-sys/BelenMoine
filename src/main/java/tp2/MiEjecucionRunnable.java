@@ -12,7 +12,15 @@ package tp2;
 public class MiEjecucionRunnable implements Runnable{
     
     public void run(){
-        
+        ir();
+    }
+    
+     public void ir() {
+        hacerMas();
+    }
+    
+    public void hacerMas(){
+        System.out.println("En la pila");
     }
     
 }
