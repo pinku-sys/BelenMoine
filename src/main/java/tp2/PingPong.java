@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package teoriaPrueba;
+package tp2;
 
 /**
  *
@@ -23,11 +23,12 @@ public class PingPong extends Thread {
  public void run() {
         for (int i = 1; i < delay * 10; i++) {
             System.out.print(cadena + "");
-            try {
+           /** try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
 
             }
+            * */
         }
     } //fin método run() 
 }
