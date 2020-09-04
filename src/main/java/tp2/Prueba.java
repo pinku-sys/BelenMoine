@@ -17,13 +17,20 @@ public class Prueba {
         // Activación
         t1.start();
         t2.start();
+        
+        for (int i = 1 ; i<100;i++) {
+            System.out.println("EN EL MAIN ITERO");
+        }
         // Espera unos segundos
-        try {
+      /**  try {
             System.out.println("duerme");
             Thread.sleep(5000);
             System.out.println("duerme");
         } catch (InterruptedException e) {
         };
+        * 
+        * */
         // Finaliza la ejecución de los threads
     }
 }
+
