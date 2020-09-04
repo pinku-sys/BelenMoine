@@ -13,14 +13,16 @@ public class Prueba {
 
     public static void main(String[] args) {
         PingPong t1 = new PingPong("PING", 33);
-        PingPong t2 = new PingPong("PONG", 10);
-        PingPong t3 = new PingPong("PANG", 10);
-        PingPong t4 = new PingPong("PUNG", 10);
+        PingPong t2 = new PingPong("PONG", 40);
+        PingPong t3 = new PingPong("PANG", 40);
+        PingPong t4 = new PingPong("PUNG", 40);
         // Activación
         t1.start();
         t2.start();
+        t3.start();
+        t4.start();
         
-        for (int i = 1 ; i<400;i++) {
+        for (int i = 1 ; i<50;i++) {
             System.out.println("EN EL MAIN ITERO");
             try {
             System.out.println("duerme");
