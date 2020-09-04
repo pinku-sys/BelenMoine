@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author Pinku
  */
-public class CajeraThread {
+public class CajeraThread extends Thread {
 private String nombre;
 private ClienteCajera cliente;
 private long initialTime;
