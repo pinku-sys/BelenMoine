@@ -31,12 +31,14 @@ public class Filosofo implements Runnable {
     @Override
     public void run() {
         try {
-            mesa.tomarTenedores(this.tenedorI, this.tenedorD);//tomo los tenedores
-            int esperaRandom = Aleatorio.intAleatorio(1000, 3000);
-            Thread.sleep(esperaRandom);
-            System.out.println(nombre + " comiendo...");
-            mesa.soltarTenedores(this.tenedorI, this.tenedorD);
-            System.out.println(nombre + " pensando...");
+            while (true) {
+                mesa.tomarTenedores(this.tenedorI, this.tenedorD);//tomo los tenedores
+                int esperaRandom = Aleatorio.intAleatorio(1000, 3000);
+                Thread.sleep(esperaRandom);
+                System.out.println(nombre + " comiendo...");
+                mesa.soltarTenedores(this.tenedorI, this.tenedorD);
+                System.out.println(nombre + " pensando...");
+            }
         } catch (InterruptedException ex) {
             Logger.getLogger(Filosofo.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -21,6 +21,8 @@ public class Mesa {
         /**
          * en una primera instancia todos los tenedores estan en true " libres
          * ".
+         * Podria considerar otra forma en la que el filosofo envia su posición.
+         * 
          */
         this.tenedores = new Boolean[tenedores];
         for (int i = 0; i < tenedores; i++) {

@@ -18,7 +18,7 @@ public class testMesa {
         int cantidadTenedores = 5;
         Mesa m = new Mesa(cantidadTenedores);
         Thread [] filosofos = new Thread[cantidadFilosofos];
-        //caso especial filosofo 1.
+        //caso especial filosofo 1. ** considerar: cola circular
         filosofos[0] = new Thread(new Filosofo("Filosofo "+(1),m, 4,0));
         for (int i = 1; i < cantidadFilosofos; i++) {
             
