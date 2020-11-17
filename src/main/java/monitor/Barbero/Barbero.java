@@ -26,7 +26,8 @@ public class Barbero implements Runnable {
         try {
             while (true) {
                 miTrabajo.esperarCliente();
-                miTrabajo.atender();
+                System.out.println("El barbero esta realizando el corte");
+                Thread.sleep(2000);
                 miTrabajo.terminarAtencion();
             }
         } catch (InterruptedException ex) {

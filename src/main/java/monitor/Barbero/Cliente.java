@@ -25,6 +25,7 @@ public class Cliente implements Runnable {
         try {
             laBarberia.sentarmeSilla();
             laBarberia.sentarseSillon();
+            laBarberia.dejarSilla();
             laBarberia.solicitarCorte();
             laBarberia.esperarAtencion();
             laBarberia.salirBarberia();

@@ -14,9 +14,10 @@ import java.util.concurrent.Semaphore;
 public class Barberia {
 
     Semaphore semSillon = new Semaphore(1);
-    Semaphore semBarbero = new Semaphore(0);
-    Semaphore semSalida = new Semaphore(0);
-    Silla sillas;
+    private boolean hayCliente = false; //un cliente solicitando un corte.
+    private boolean sillonLibre = true; // el sillon esta libre al principio.
+    private boolean salirBarberia = false; //sirve para que el cliente salga de la barberia.
+    Silla sillas; //sillas, usan sincronizacion con monitores.
 
     public Barberia(int maxSillas) {
         //Silla es una clase que representa la cantidad de sillas totales y usa mecanismo de monitores
@@ -24,51 +25,59 @@ public class Barberia {
     }
 
     //metodos de barbero
-    public void esperarCliente() throws InterruptedException {
+    public synchronized void esperarCliente() throws InterruptedException {
         System.out.println("esperando cliente");
-        semBarbero.acquire();
+        while (!hayCliente) {
+            this.wait();
+        }
     }
 
-    public void atender() throws InterruptedException {
-        System.out.println("El barbero esta realizando el corte");
-        Thread.sleep(2000);
-    }
-
-    public void terminarAtencion() {
-        System.out.println("termine la atencion");
-        semSalida.release();
+    public synchronized void terminarAtencion() {
+        salirBarberia = true;
+        this.notifyAll();
     }
 
     //fin metodos barbero
-    //metodos de cliente
+    //metodos de cliente. preguntar.
     public void sentarmeSilla() throws InterruptedException {
         sillas.intentarSentarse();
     }
 
-    public void sentarseSillon() throws InterruptedException {
+    public synchronized void sentarseSillon() throws InterruptedException {
         /**
          * Espera sentarse en un sillon, y libera una silla.
          */
-        semSillon.acquire(); //me atiende el barbero
-        sillas.dejarSilla(); //libero una silla
+        while ( !sillonLibre ) {
+            this.wait();
+        }
+        
+        sillonLibre = false;
         System.out.println(Thread.currentThread().getName() + " se sento en el sillon");
-        //una vez que ya me sente en un sillon, libero la silla, uso el semaforo de la silla.
+        //una vez que ya me sente en un sillon, libero la silla. Metodo abajo.
 
     }
-
-    public void solicitarCorte() {
-        System.out.println(Thread.currentThread().getName()+ " solicito corte");
-        semBarbero.release();
+    //preguntar. sillas tiene monitores.
+    public void dejarSilla () {
+        sillas.dejarSilla(); //libero una silla
     }
 
-    public void esperarAtencion() throws InterruptedException {
-        System.out.println(Thread.currentThread().getName()+ " esperando antencion");
-        semSalida.acquire();
+    public synchronized void solicitarCorte() {
+        System.out.println(Thread.currentThread().getName() + " solicito corte");
+        this.hayCliente = true;
+        this.notifyAll();
     }
 
-    public void salirBarberia() {
-        System.out.println(Thread.currentThread().getName() +" sali de la barberia");
-        semSillon.release();
+    public synchronized void esperarAtencion() throws InterruptedException {
+        System.out.println(Thread.currentThread().getName() + " esperando antencion");
+        while (!this.salirBarberia) {
+            this.wait();
+        }
+    }
+
+    public synchronized void salirBarberia() {
+        System.out.println(Thread.currentThread().getName() + " sali de la barberia");
+        this.sillonLibre = true;
+        this.notifyAll();
     }
     //fin metodos cliente
 }
