@@ -36,23 +36,21 @@ public class Buffer {
      *
      * @param algo
      */
-    public void insertar(ElementoDelayed algo) {
-        this.colaSincronizada.put(algo);
+    public void insertar(ElementoDelayed elem) {
+        this.colaSincronizada.put(elem);
     }
 
     /**
      * Utilizo metodo TAKE: take() Recupera y elimina el encabezado de esta
      * cola, esperando si es necesario hasta que un elemento con un retraso
-     * vencido esté disponible en esta cola.REMOVE: RECUPera y elimina el
+     * vencido esté disponible en esta cola. REMOVE: RECUPera y elimina el
      * encabezado de la cola, si esta presente haya EXPIRADO SU TIEMPO D ESPERA
      * o no.
      *
      * @throws java.lang.InterruptedException
      */
     public ElementoDelayed extraer() throws InterruptedException {
-        System.out.println("me voy  a trabar");
         ElementoDelayed cabeza = this.colaSincronizada.take();
-        System.out.println(" me destrabe");
         return cabeza;
     }
 
@@ -64,6 +62,6 @@ public class Buffer {
 
     public void eliminarTodo() {
         this.colaSincronizada.clear();
-
     }
+    
 }

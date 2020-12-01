@@ -26,13 +26,11 @@ public class Productor implements Runnable {
     public void run() {
         int item;
         long delay;
-        
             item = Aleatorio.intAleatorio(100, 500);
             delay = Aleatorio.intAleatorio(1, 10);
             ElementoDelayed algo = new ElementoDelayed(item, delay);
             this.buffer.insertar(algo);
-            System.out.println(nombre+ " agrego elem");
-        
+            System.out.println(nombre+ " agrego elem: " + algo.imprimir());      
     }
 
 }

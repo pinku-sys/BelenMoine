@@ -15,33 +15,44 @@ import java.util.concurrent.TimeUnit;
 public class ElementoDelayed implements Delayed{    
     private int item;
     private long tiempoExpira;
-    private long tiempoDelay;
 
     public ElementoDelayed(int item, long delay) {
         this.item = item;
-        this.tiempoDelay = delay;
         //Tiempo expira es el tiempo actual + delay
         this.tiempoExpira = System.currentTimeMillis()+delay;
     }
     
     
-
     @Override
-    public long getDelay(TimeUnit unit) {
-        return this.tiempoDelay;
+    public long getDelay(TimeUnit unit) { /**
+     * GET DELAY LO QUE HACE ES DESCONTAR TIEMPO DEL TIEMPO ACTUAL EN REALIDAD con el tiempo del sistema.
+     */
+        long diferencia = this.tiempoExpira  - System.currentTimeMillis();
+        return unit.convert(diferencia, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public int compareTo(Delayed o) {
+        /**
+         * Metodo necesario para dar un "orden". 
+         */
         int res;
         long miTiempo = this.getDelay(TimeUnit.MILLISECONDS);
         long suTiempo = o.getDelay(TimeUnit.MILLISECONDS);
         if ( miTiempo < suTiempo) {
-            res = -1; //menor
+            res = -1; //MENOR
         } else {
-            res = 1; //mayorOIgual
+            if (miTiempo > suTiempo) {
+                res = -1; //MAYOR
+            } else {
+                res = 0; //IGUAL
+            }
         }
         return res;
+    }
+    
+    public String imprimir() {
+       return("elemento : "+ this.item + "con Tiempo expiracion: " + this.tiempoExpira);
     }
     
 }

@@ -18,13 +18,14 @@ public class Consumidor implements Runnable {
 
     public Consumidor(Buffer buffer, String nombre) {
         this.buffer = buffer;
+        this.nombre = nombre;
     }
 
     @Override
     public void run() {
         try {
-            this.buffer.extraer();
-            System.out.println(nombre +" extrajo cabecera");
+            ElementoDelayed cbcera =this.buffer.extraer();
+            System.out.println(nombre + " extrajo cabecera " + cbcera.imprimir());
         } catch (InterruptedException ex) {
             Logger.getLogger(Consumidor.class.getName()).log(Level.SEVERE, null, ex);
         }
